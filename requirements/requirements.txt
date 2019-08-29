@@ -1,0 +1,6 @@
+Django
+djangorestframework
+uwsgi
+psycopg2
+urllib3
+dj-database-url
