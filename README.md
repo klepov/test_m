@@ -1,9 +1,9 @@
 # test_m
 
 Запуск 
-docker-compose up --build -d
-docker-compose up
-http://127.0.0.1:8002/api/v1/
+- docker-compose up --build -d
+- docker-compose up
+- http://127.0.0.1:8002/api/v1/
 
 # Тест на вакансию Backend-разработчик Mind&Machine
 
