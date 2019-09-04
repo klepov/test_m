@@ -13,6 +13,12 @@ class Item(models.Model):
     price = models.FloatField()
 
 
+class BoughtUsersManager(models.Manager):
+    def get_queryset(self):
+        return super().get_queryset().annotate(
+            bought_items_count=Count('bought_items')).annotate(total_sum=Sum('bought_items__price'))
+
+
 class User(A_User):
     dttm_created = models.DateTimeField(default=datetime.datetime.now)
     dttm_deleted = models.DateTimeField(default=datetime.datetime.now)
@@ -26,9 +32,5 @@ class User(A_User):
 
     sex = models.CharField(max_length=1, choices=SEX_CHOICES)
     bought_items = models.ManyToManyField(Item)
-
-    def count_items_and_cost(self):
-        return User.objects.filter(id=self.id).annotate(bought_items_count=Count('bought_items')).annotate(
-            total_sum=Sum('bought_items__price'))
-        # return User.objects.annotate(bought_items_count=Count('bought_items')).annotate(
-        #     total_sum=Sum('bought_items__price'))
+    objects = models.Manager()
+    bought_users = BoughtUsersManager()

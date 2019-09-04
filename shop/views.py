@@ -35,7 +35,7 @@ class UsersViewSet(ReadOnlyModelViewSet):
         ids = self.request.GET.getlist('ids')
         if ids:
             try:
-                return User.objects.filter(id__in=list(map(int, self.request.GET.get('ids').split(','))))
+                return User.bought_users.filter(id__in=list(map(int, self.request.GET.get('ids').split(','))))
             except:
                 raise APIException()
         return super().get_queryset()
